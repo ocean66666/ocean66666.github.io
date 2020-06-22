@@ -1,26 +1,18 @@
-title: wu-kan # 站点标题
+title: 江南PIG厂 # 站点标题
 description: | # 头像背后的信息（html格式），<br/>代表换行
-  SYSU超算17级在读<br/>
-  永远喜欢水野爱<br/>
-  田宫例四驱车<br/>
+  在读大学生<br/>
   ASC<br/>
-  <a href="mailto:i@wu-kan.cn">
+  <a href="mailto:3120093976@qq.com">
     <i class="fas fa-envelope"></i>
   </a>
-  <a href="https://github.com/wu-kan">
+  <a href="https://github.com/ocean66666">
     <i class="fab fa-github"></i>
   </a>
-  <a href="https://codeforces.com/profile/WuK">
-    <i class="fas fa-chart-bar"></i>
-  </a>
-  <a href="https://vjudge.net/user/WuK">
-    <i class="fas fa-smile"></i>
-  </a>
-  <a href="https://www.zhihu.com/people/wu.kan/activities">
+  <a href="https://www.zhihu.com/people/wu-ya-zuo-fei-ji-6-5">
     <i class="fab fa-zhihu"></i>
   </a>
   <iframe
-    src="https://music.163.com/outchain/player?type=0&id=155059595&auto=0&height=32"
+    src="https://music.163.com/#/song?id=167975"
     width=100%
     height=52
     frameborder="no"
@@ -107,7 +99,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                       "night": "for(let i=7; i<16; ++i) if(document.body.classList.contains(`theme-base-0`+i.toString(16))) { document.body.classList.remove(`theme-base-0`+i.toString(16)); document.body.classList.add(`theme-base-0`+((i-6)%9+7).toString(16)); break; }",
                       "content": {
                         "link": ["https:\/\/jekyll-theme-WuK.wu-kan.cn"],
-                        "skin": ["要换成我的朋友吗？", "让她放个假吧~"],
+                        "skin": ["要换成我的朋友吗？", "让他放个假吧~"],
                         "hidden": true,
                         "custom": [{
                           "selector": "a",
@@ -370,7 +362,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                     document.getElementById("run_time_hour"),
                     document.getElementById("run_time_minute"),
                     document.getElementById("run_time_second"),
-                    "10/04/2017 11:03:56")// 这是我第一篇CSDN博客的时间
+                    "22/06/2020 18:51:58")// 这是我第一篇CSDN博客的时间
                   </script>
                 </div>
               - | # 不蒜子页面统计，看不懂可不改
@@ -403,25 +395,6 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   <i class="fas fa-thumbs-up fa-fw"></i>
                   <a href="https://jekyll-theme-WuK.wu-kan.cn">
                     jekyll-theme-WuK
-                  </a>
-                </div>
-              - | # Copyright声明
-                <div>
-                  <i class="fas fa-copyright fa-fw"></i>
-                  2017-2020 WuK
-                </div>
-              - | # 我的备案信息，请你的网站删掉这一项。互联网非法外之地！
-                <div>
-                  <i class="fas fa-info-circle fa-fw"></i>
-                  <a href="http://beian.miit.gov.cn">
-                    粤ICP备 20024947号
-                  </a>
-                </div>
-              - | # 公安网备信息
-                <div>
-                  <img src="http://www.beian.gov.cn/img/new/gongan.png" class="fa-fw"></img>
-                  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34070202000407">
-                    皖公网安备 34070202000407号
                   </a>
                 </div>
             wordcount: # 全站字数统计
@@ -602,7 +575,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
           group_by: "%b %Y" # 见<https://liquid.bootcss.com/filters/date/>
           posts_count:
             enable: true # 博文数量统计
-            append: 篇博文。长路漫漫！ # 提示语
+            append: 长路漫漫！ # 提示语
           pie_chart: # 显示一个标签的饼状统计图，需要引入 mermaid
             enable: true
           year_count: true
