@@ -587,11 +587,10 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
               <script>
                 var usage = "payment";
                 var wechat = "wxp://f2f0aknCsUtphOFmFtiy2VWd1CUjSHLJzhei";
-                var tenpay = "https://i.qianbao.qq.com/wallet/sqrcode.htm?m=tenpay&f=wallet&a=1&ac=CAEQ77zFwQMY-6u57gU%3D_xxx_sign&u=942759535&n=%E8%94%9A";
-                var alipay = "https://qr.alipay.com/fkx02750b5kbplxvudqrx16";
-                var paypal = "https://paypal.me/wukan0621";
+                var tenpay = "https://i.qianbao.qq.com/wallet/sqrcode.htm?m=tenpay&f=wallet&u=3120093976&a=1&n=%E6%8B%92%E7%B5%95%E5%B9%B3%E5%BA%B8%E7%9A%84%E7%8B%82%E3%80%82&ac=CAEQmLbjzwsYta3C9wU%3D_xxx_sign";
+                var alipay = "HTTPS://QR.ALIPAY.COM/FKX04219DFUYKYVUODE3FE";
                 var myname = "江南PIG厂";
-                var profile = "https://gravatar.loli.net/avatar/289efba375d63424de3c49569c446744?s=320";
+                var profile = "https://sm.ms/image/bedOYqVx4ZnUBMj";
                 var multilingual = true;
                 var myname_hans = "刘";
                 var myname_hant = "刘";
@@ -731,7 +730,7 @@ permalink: /_posts/:year-:month-:day-:title/ #生成文章的地址格式，我�
 # timezone: Asia/Shanghai # 解决githubpage显示时间不正确的问题，见<https://www.iana.org/time-zones>
 # future: false # 不发布时间在未来的文章
 
-# limit_posts: 999 # 限制博文数量
+# limit_posts: 9999 # 限制博文数量
 # encoding: utf-8
 
 markdown: kramdown
