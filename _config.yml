@@ -12,7 +12,7 @@ description: | # 头像背后的信息（html格式），<br/>代表换行
     <i class="fab fa-zhihu"></i>
   </a>
   <iframe
-    src="https://music.163.com/outchart/player?type=0&id=155059595&auto=0&height=32"
+    src="https://music.163.com/outchain/player?type=0&id=155059595&auto=0&height=32"
     width=100%
     height=52
     frameborder="no"
@@ -98,7 +98,6 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                       "hidden": true,
                       "night": "for(let i=7; i<16; ++i) if(document.body.classList.contains(`theme-base-0`+i.toString(16))) { document.body.classList.remove(`theme-base-0`+i.toString(16)); document.body.classList.add(`theme-base-0`+((i-6)%9+7).toString(16)); break; }",
                       "content": {
-                        "link": ["https:\/\/jekyll-theme-WuK.wu-kan.cn"],
                         "skin": ["要换成我的朋友吗？", "让他放个假吧~"],
                         "hidden": true,
                         "custom": [{
@@ -224,8 +223,6 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             nav: # 导航部分的内容，你也可以自己增加文字、图标（来自fontawesome）和对应的链接
               - title: '<i class="fas fa-home fa-fw"></i> 首页'
                 href: /
-              - title: '<i class="fas fa-comments fa-fw"></i> 留言'
-                href: /comments/
               - title: '<i class="fas fa-tags fa-fw"></i> 标签'
                 href: /tags/
               - title: '<i class="fas fa-archive fa-fw"></i> 归档'
