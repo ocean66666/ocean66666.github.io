@@ -1,0 +1,942 @@
+<!DOCTYPE html><html><head><title>C语言程序设计</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<ul><li><p><a href="#head1"> C语言程序设计</a></p>
+
+<ul>
+<li><p><a href="#head2"> 七、指针</a></p></li>
+<li><p><a href="#head3"> 1、地址与指针</a></p>
+
+<ul>
+<li><p><a href="#head4"> 为什么要用指针？</a></p></li>
+<li><p><a href="#head5"> 指针含义</a></p></li></ul></li>
+<li><p><a href="#head6"> 2、指针变量：定义和赋值、访问、参数和返回值</a></p></li>
+<li><p><a href="#head7"> 3、指针运算：指针与整数的加减、指针相减和比较、强制类型转换和void*指针、不合法的指针运算、指针类型与数组类型的差异</a></p></li>
+<li><p><a href="#head8"> 4、指针与数组</a></p></li>
+<li><p><a href="#head9"> 5、指向二维数组的指针、多重指针和指针数组</a></p></li>
+<li><p><a href="#head10"> 6、函数指针</a></p></li>
+<li><p><a href="#head11"> 八、结构和联合</a></p></li>
+<li><p><a href="#head12"> 1、结构：结构类型的定义和访问、包含结构的结构</a></p>
+
+<ul>
+<li><p><a href="#head13"> 结构类型的定义</a></p></li>
+<li><p><a href="#head14"> 结构类型的访问</a></p></li>
+<li><p><a href="#head15"> 包括结构的结构</a></p></li></ul></li>
+<li><p><a href="#head16"> 2、联合：联合类型的定义和访问</a></p></li>
+<li><p><a href="#head17"> 3、类型定义语句（typedef）</a></p></li>
+<li><p><a href="#head18"> 九、输入/输出和文件</a></p></li>
+<li><p><a href="#head19"> 1、输入/输出的基本过程和文件类型</a></p>
+
+<ul>
+<li><p><a href="#head20"> 文件的分类</a></p></li>
+<li><p><a href="#head21"> 文件缓冲区</a></p></li>
+<li><p><a href="#head22"> 文件类型指针</a></p></li></ul></li>
+<li><p><a href="#head23"> 2、文件的打开、创建和关闭</a></p></li>
+<li><p><a href="#head24"> 3、文件数据的正文（文本）格式读写</a></p>
+
+<ul>
+<li><p><a href="#head25"> 1、读写一个字符的函数</a></p></li>
+<li><p><a href="#head26"> 2、读写一个字符串的函数</a></p></li>
+<li><p><a href="#head27"> 3、用格式化的方式读取文本文件</a></p></li>
+<li><p><a href="#head28"> 4、用二进制方式向文件读写一组数据</a></p></li></ul></li>
+<li><p><a href="#head29"> 4、读写操作中的定位</a></p></li>
+<li><p><a href="#head30"> 5、文件数据的二进制格式读写</a></p>
+
+<ul>
+<li><p><a href="#head31"> 1、二进制文件操作</a></p></li>
+<li><p><a href="#head32"> 2、二进制数据</a></p></li>
+<li><p><a href="#head33"> 3、文件上下文</a></p></li></ul></li></ul></li>
+</ul>
+
+
+
+<h1 id="c语言程序设计"><span id="head1"> C语言程序设计</span></h1>
+
+
+
+<h2 id="七指针"><span id="head2"> 七、指针</span></h2>
+
+
+
+<h3 id="1地址与指针"><span id="head3"> 1、地址与指针</span></h3>
+
+<p>通过地址能找到所需的变量单元，可以说，地址指向变量单元，因此，将地址形象化地称为<strong>”指针”</strong>。</p>
+
+
+
+<h4 id="为什么要用指针"><span id="head4"> 为什么要用指针？</span></h4>
+
+<p>指针解决了一些编程中基本的问题。</p>
+
+<p>（1）指针的使用使得不同区域的代码可以轻易的共享内部数据。</p>
+
+<p>（2）指针使得一些复杂的链接性的数据结构的构建成为可能。</p>
+
+<p>（3）有些操作必须使用内存。如操作申请的堆内存。</p>
+
+
+
+<h4 id="指针含义"><span id="head5"> 指针含义</span></h4>
+
+<p>指针是程序数据在内存中的地址，而指针变量是用来保存这些地址的变量。</p>
+
+<p><strong>由于内存中的每个字节都有一个唯一的编号，因此，在程序中使用的变量，常量，甚至数函数等数据，当他们被载入到内存中后，都有自己唯一的一个编号，这个编号就是这个数据的地址。指针就是这样形成的。</strong></p>
+
+
+
+<h3 id="2指针变量定义和赋值访问参数和返回值"><span id="head6"> 2、指针变量：定义和赋值、访问、参数和返回值</span></h3>
+
+<p>C语言中，定义变量时，在变量名 前 写一个 * 星号，这个变量就变成了对应变量类型的指针变量。必要时要加( ) 来避免优先级的问题。</p>
+
+<p><strong>赋值：</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">int</span> num=<span class="hljs-number">1</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">int</span>* p_num=#
+</div><div class="hljs-line">特殊的情况，并不一定需要使用&amp;取地址：
+</div><div class="hljs-line"><span class="hljs-number">1</span>、数组名的值就是这个数组的第一个元素的地址。
+</div><div class="hljs-line"><span class="hljs-number">2</span>、函数名的值就是这个函数的地址。
+</div><div class="hljs-line"><span class="hljs-number">3</span>、字符串字面值常量作为右值时，就是这个字符串对应的字符数组的名字，也就是这个字符串在内存中的地址。
+</div></code></pre>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-comment">//实例</span>
+</div><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+</div><div class="hljs-line"><span class="hljs-function"></span>{
+</div><div class="hljs-line">   <span class="hljs-keyword">int</span>  var = <span class="hljs-number">20</span>;   <span class="hljs-comment">/* 实际变量的声明 */</span>
+</div><div class="hljs-line">   <span class="hljs-keyword">int</span>  *ip;        <span class="hljs-comment">/* 指针变量的声明 */</span>
+</div><div class="hljs-line">   ip = &amp;var;  <span class="hljs-comment">/* 在指针变量中存储 var 的地址 */</span>
+</div><div class="hljs-line">   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Address of var variable: %p\n"</span>, &amp;var  );
+</div><div class="hljs-line">   <span class="hljs-comment">/* 在指针变量中存储的地址 */</span>
+</div><div class="hljs-line">   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Address stored in ip variable: %p\n"</span>, ip );
+</div><div class="hljs-line">   <span class="hljs-comment">/* 使用指针访问值 */</span>
+</div><div class="hljs-line">   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Value of *ip variable: %d\n"</span>, *ip ); 
+</div><div class="hljs-line">   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+
+<p><img src="/assets/image/2020-08-10-8.jpg" style="zoom: 80%;" alt=""></p>
+
+
+
+<h3 id="3指针运算指针与整数的加减指针相减和比较强制类型转换和void指针不合法的指针运算指针类型与数组类型的差异"><span id="head7"> 3、指针运算：指针与整数的加减、指针相减和比较、强制类型转换和void*指针、不合法的指针运算、指针类型与数组类型的差异</span></h3>
+
+<p><strong>加减：</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX = <span class="hljs-number">3</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span>
+</div><div class="hljs-line"><span class="hljs-function"></span>{
+</div><div class="hljs-line">   <span class="hljs-keyword">int</span>  var[] = {<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">200</span>};
+</div><div class="hljs-line">   <span class="hljs-keyword">int</span>  i, *ptr;
+</div><div class="hljs-line">   <span class="hljs-comment">/* 指针中的数组地址 */</span>
+</div><div class="hljs-line">   ptr = var;
+</div><div class="hljs-line">   <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt; MAX; i++)
+</div><div class="hljs-line">   {
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"存储地址：var[%d] = %x\n"</span>, i, ptr );
+</div><div class="hljs-line">      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"存储值：var[%d] = %d\n"</span>, i, *ptr );
+</div><div class="hljs-line">      <span class="hljs-comment">/* 移动到下一个位置 */</span>
+</div><div class="hljs-line">      ptr++;
+</div><div class="hljs-line">   }
+</div><div class="hljs-line">   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+
+<p><img src="/assets/image/2020-08-10-9.jpg" style="zoom: 80%;" alt=""></p>
+
+<p><strong>比较：</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX = <span class="hljs-number">3</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span>
+</div><div class="hljs-line"><span class="hljs-function"></span>{
+</div><div class="hljs-line">   <span class="hljs-keyword">int</span>  var[] = {<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">200</span>};
+</div><div class="hljs-line">   <span class="hljs-keyword">int</span>  i, *ptr;
+</div><div class="hljs-line">   <span class="hljs-comment">/* 指针中第一个元素的地址 */</span>
+</div><div class="hljs-line">   ptr = var;
+</div><div class="hljs-line">   i = <span class="hljs-number">0</span>;
+</div><div class="hljs-line">   <span class="hljs-keyword">while</span> ( ptr &lt;= &amp;var[MAX - <span class="hljs-number">1</span>] )
+</div><div class="hljs-line">   {
+</div><div class="hljs-line">      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Address of var[%d] = %p\n"</span>, i, ptr );
+</div><div class="hljs-line">      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Value of var[%d] = %d\n"</span>, i, *ptr );
+</div><div class="hljs-line">      <span class="hljs-comment">/* 指向上一个位置 */</span>
+</div><div class="hljs-line">      ptr++;
+</div><div class="hljs-line">      i++;
+</div><div class="hljs-line">   }
+</div><div class="hljs-line">   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<p>当上面的代码被编译和执行时，他会产生下列结果： <br>
+<img src="/assets/image/2020-08-10-10.jpg" style="zoom: 80%;" alt=""></p>
+
+<p><strong>强制类型转换：</strong></p>
+
+<p>指针类型强制转换：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">int</span> m;
+</div><div class="hljs-line"><span class="hljs-keyword">int</span>* pm=&amp;m;
+</div><div class="hljs-line"><span class="hljs-keyword">char</span>* cp=(<span class="hljs-keyword">char</span> *)&amp;m;
+</div></code></pre>
+
+<p><strong>void指针：</strong></p>
+
+<ul><li><p>void *</p></li>
+<li><p>可以用其指代任何类型的指针，但不能用void指针直接进行操作；只能转换成对应类型的指针后，才能操作</p></li>
+</ul>
+
+<p>使用方式:</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">enum</span> Season{
+</div><div class="hljs-line">    Spring,Summer=<span class="hljs-number">18</span>,Autumn,Winter
+</div><div class="hljs-line">}season;
+</div><div class="hljs-line"><span class="hljs-keyword">enum</span> Season *s=&amp;season;
+</div><div class="hljs-line"><span class="hljs-keyword">void</span>* vs=s;
+</div><div class="hljs-line"><span class="hljs-keyword">int</span>* ns=(<span class="hljs-keyword">int</span>*)vs;       <span class="hljs-comment">//转换成对应的int型指针</span>
+</div><div class="hljs-line"><span class="hljs-built_in">printf</span>(<span class="hljs-string">"ns=%d\n"</span>,ns);
+</div></code></pre>
+
+<p>因其可以指代任何类型的指针。所以将void指针作为函数参数时，表示接受任何类型的指针参数</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-keyword">void</span>* a)</span></span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"void*--&gt;%d\n"</span>,*(<span class="hljs-keyword">int</span>*)a);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">void</span> main{
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> m=<span class="hljs-number">10</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> *p=&amp;m;
+</div><div class="hljs-line">    test(p);
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<p><strong>不合法的指针运算：</strong></p>
+
+<p>const常量指针不能做++（–），因为常量指针不能改变</p>
+
+<p><strong>指针类型和数组类型的差异：</strong></p>
+
+<p>（1）字符数组由若干个元素组成，每个元素中放一个字符，而字符指针变量中存放的是地址（字符串第一个字符的地址），绝不是将字符串放到字符指针变量中。</p>
+
+<p>（2）赋值方式。可以对字符指针变量赋值，但不能对数组名赋值。</p>
+
+<p>（3）初始化的含义。</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">char</span>* a=<span class="hljs-string">"I love China!"</span>;    <span class="hljs-comment">//定义字符指针变量a，并把字符串第一个元素的地址赋给a</span>
+</div><div class="hljs-line"><span class="hljs-keyword">char</span> str[<span class="hljs-number">14</span>]=<span class="hljs-string">"I love China!"</span>;   <span class="hljs-comment">//定义字符数组str，并把字符串赋给数组中各元素</span>
+</div></code></pre>
+
+<p>（4）存储单元的内容。编译时为字符数组分配若干存储单元，以存放各元素的值，而对字符指针变量，只分配一个存储单元。</p>
+
+<p>（5）指针变量的值是可以改变的，而字符数组名代表一个固定的值（数组首元素的地址），不能改变。</p>
+
+<p>（6）字符数组中各元素的值是可以改变的（可以对它们再赋值），但字符指针变量指向的字符串常量中的内容是不可以被取代的（不能对他们再赋值）。</p>
+
+<p>（7）引用数组元素，可以用下标法。引用指针元素，可以用地址法。</p>
+
+<p>（8）用指针变量指向一个格式字符串，可以用它代替printf函数中的格式字符串。</p>
+
+<p>例如：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">char</span>* format;
+</div><div class="hljs-line">format=<span class="hljs-string">"a=%d,b=%f\n"</span>;
+</div><div class="hljs-line"><span class="hljs-built_in">printf</span>(format,a,b);
+</div></code></pre>
+
+
+
+<h3 id="4指针与数组"><span id="head8"> 4、指针与数组</span></h3>
+
+<ul><li><p>所谓数组元素的指针就是数组元素的地址。</p></li>
+</ul>
+
+<p>可以定义一个数组a[10],定义一个指针*p,把a[0]元素的地址赋给指针变量a：p=&amp;a[0]</p>
+
+
+
+<h3 id="5指向二维数组的指针多重指针和指针数组"><span id="head9"> 5、指向二维数组的指针、多重指针和指针数组</span></h3>
+
+<p>二维数组a的有关指针：</p>
+
+<p>a[3] [4]={{1,3,5,7},{9,11,13,15},{17,19,21,23}};</p>
+
+<table><tbody><tr style="font-weight:bold">  <td>表示形式</td>  <td>含义</td>  <td>值</td></tr><tr>  <td>a</td>  <td>二维数组名，指向一维数组a[0]，即0行起始地址</td>  <td>2000</td></tr><tr>  <td>a[0], *(a+0), *a</td>  <td>0行0列元素地址</td>  <td>2000</td></tr><tr>  <td>a+1,&amp;a[1]</td>  <td>1行起始地址</td>  <td>2016</td></tr><tr>  <td>a[1],*(a+1)</td>  <td>1行0列元素a[1] [0]的地址</td>  <td>2016</td></tr><tr>  <td>a[1]+2,*(a+1)+2,&amp;a[1] [2]</td>  <td>1行2列元素a[1] [2]的地址</td>  <td>2024</td></tr><tr>  <td><em>(a[1]+2), </em>( * (a+1)+2),a[1] [2]</td>  <td>1行2列元素a[1] [2]的值</td>  <td>是元素值，为13</td></tr></tbody></table>
+
+
+
+<h3 id="6函数指针"><span id="head10"> 6、函数指针</span></h3>
+
+<p>如果在程序中定义了一个函数，在编译时会把函数的源代码转换为可执行代码并分配一段存储空间。这段内存空间有一个起始地址，也成为函数的入口地址。每次调用函数时都从该地址入口开始执行此段函数代码。函数名代表函数的起始地址，调用函数时，从函数名得到函数的起始地址，并执行函数代码。</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>)</span></span>;   <span class="hljs-comment">//函数声明</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> (*p)(<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>);  <span class="hljs-comment">//定义指向函数的指针变量p</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> a,b,c;
+</div><div class="hljs-line">    p=max;              <span class="hljs-comment">//使p指向max函数</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"please enter a and b:"</span>);
+</div><div class="hljs-line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d,%d"</span>,&amp;a,&amp;b);
+</div><div class="hljs-line">    c=(*p)(a,b);        <span class="hljs-comment">//通过指针变量调用max函数</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"a=%d\nb=%d\nmax=%d\n"</span>,a,b,c);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>{   <span class="hljs-comment">//定义max函数</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> z;
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>(x&gt;y)
+</div><div class="hljs-line">        z=x;
+</div><div class="hljs-line">    <span class="hljs-keyword">else</span>
+</div><div class="hljs-line">        z=y;
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> z;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ol><li rel="1"><p>定义指向函数的指针变量，并不意味着这个指针变量可以指向任何函数，它只能指向在定义时指定的类型的函数。</p></li>
+<li rel="2"><p>如果要用指针调用函数，必须先使指针变量指向该函数。</p></li>
+<li rel="3"><p>在给函数指针变量赋值时，只须给出函数名而不必给出参数。</p></li>
+<li rel="4"><p>用函数指针变量调用函数时，只须将（*p）代替函数名即可，在（ *p）之后的括号中根据需要写上实参。</p></li>
+<li rel="5"><p>对指向函数的指针变量不能进行算术运算。如p+n,p-n等运算都是无意义的。</p></li>
+<li rel="6"><p>用函数名调用函数，只能调用所指定的一个函数，而通过指针变量调用函数比较灵活，可以根据不同情况先后调用不同的函数。</p></li>
+</ol>
+
+<p><strong>返回指针值的函数：</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">float</span> score[] [<span class="hljs-number">4</span>]={{<span class="hljs-number">60</span>,<span class="hljs-number">70</span>,<span class="hljs-number">80</span>,<span class="hljs-number">90</span>},{<span class="hljs-number">56</span>,<span class="hljs-number">89</span>,<span class="hljs-number">67</span>,<span class="hljs-number">88</span>},{<span class="hljs-number">34</span>,<span class="hljs-number">78</span>,<span class="hljs-number">90</span>,<span class="hljs-number">66</span>}};
+</div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-keyword">float</span> *<span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-keyword">float</span> (*pointer)</span>[4],<span class="hljs-keyword">int</span> n)</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">float</span> *p;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> i,k;
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"enter the number of students:"</span>);
+</div><div class="hljs-line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;k);
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The score of NO.%d are:\n"</span>,k);
+</div><div class="hljs-line">    p=search(score,k);
+</div><div class="hljs-line">    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">4</span>;i++)
+</div><div class="hljs-line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%5.2f\t"</span>,*(p+i));
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">float</span> *<span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-keyword">float</span> (*pointer)</span>[4],<span class="hljs-keyword">int</span> n)</span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">float</span> *pt;
+</div><div class="hljs-line">    pt+=*(pointer+n);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> pt;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h2 id="八结构和联合"><span id="head11"> 八、结构和联合</span></h2>
+
+
+
+<h3 id="1结构结构类型的定义和访问包含结构的结构"><span id="head12"> 1、结构：结构类型的定义和访问、包含结构的结构</span></h3>
+
+
+
+<h4 id="结构类型的定义"><span id="head13"> 结构类型的定义</span></h4>
+
+<ul><li><p>C语言允许用户自己建立由不同类型数据组成的组合型的数据类型，他们称为<strong>结构体</strong>。</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">struct</span> Student{
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> num;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> age;
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> sex;
+</div><div class="hljs-line">};
+</div><div class="hljs-line">可以定义结构体变量名：
+</div><div class="hljs-line"><span class="hljs-keyword">struct</span> Student student1,student2;
+</div><div class="hljs-line">在定义了结构体变量后，系统会为之分配内存单元。
+</div><div class="hljs-line">------------------------------------------------------------------------------------------------------------
+</div><div class="hljs-line">也可以用下列方式定义：
+</div><div class="hljs-line"><span class="hljs-keyword">struct</span> Student{
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> num;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> age;
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> sex;
+</div><div class="hljs-line">}student1,student2;
+</div><div class="hljs-line">------------------------------------------------------------------------------------------------------------
+</div><div class="hljs-line">下面指定了一个无名的结构体类型，不能用此结构体类型去定义其他变量
+</div><div class="hljs-line"><span class="hljs-keyword">struct</span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> num;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> age;
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> sex;
+</div><div class="hljs-line">}student1,student2;
+</div></code></pre>
+
+<ul><li><p>结构体类型和变量是不同的概念，，只能对变量赋值、存取或运算，而不能对一个类型赋值、存取或运算。在编译时，对类型是不分配空间的，只对变量分配空间。</p></li>
+<li><p>结构体类型中的成员名可以与程序中的变量名相同，但二者不代表同一对象。如程序中可以另定义一个num，他与struct中的num是两回事，互不干扰。</p></li>
+<li><p>对结构体变量中的成员，可以单独使用，它的作用与地位相当于普通变量。</p></li>
+</ul>
+
+
+
+<h4 id="结构类型的访问"><span id="head14"> 结构类型的访问</span></h4>
+
+<ul><li><p>在定义结构体变量时可以对它的成员初始化。</p></li>
+<li><p>可以引用结构体变量中成员的值，引用方式为：</p></li>
+</ul>
+
+<p><strong>结构体变量.成员名</strong></p>
+
+<blockquote>
+  <p>不能企图通过输出结构体变量名来达到输出结构体变量所有成员的值</p>
+</blockquote>
+
+<ul><li><p>如果成员本身又属于一个结构体类型，则要用若干个成员运算符，一级一级的找到最低一级的成员。只能对最低一级的成员进行赋值或存取以及运算。</p></li>
+<li><p>对结构体类型的成员可以像普通变量一样进行各种运算（根据其类型决定可以进行的运算）。</p></li>
+<li><p>同类的结构体变量可以互相赋值。</p></li>
+<li><p>可以引用结构体变量成员的地址，也可以引用结构体变量的地址。例如：</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;student1.num);  <span class="hljs-comment">//输入student1.num的值</span>
+</div><div class="hljs-line"><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%o"</span>,&amp;student1);     <span class="hljs-comment">//输出结构体变量student1的起始地址</span>
+</div><div class="hljs-line">结构体变量的地址主要用于函数参数，传递结构体变量的地址
+</div></code></pre>
+
+
+
+<h4 id="包括结构的结构"><span id="head15"> 包括结构的结构</span></h4>
+
+<p>例如：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-meta"># <span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-meta"># <span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">struct</span> data
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> year;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> month;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> day;
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">struct</span> student
+</div><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> name[<span class="hljs-number">30</span>];
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> num;
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> sex;
+</div><div class="hljs-line">    <span class="hljs-keyword">struct</span> data birthday;
+</div><div class="hljs-line">}student = {<span class="hljs-string">"dire"</span>,<span class="hljs-number">2017</span>,<span class="hljs-string">'W'</span>,{<span class="hljs-number">1990</span>,<span class="hljs-number">1</span>,<span class="hljs-number">6</span>}};
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span>
+</div><div class="hljs-line"><span class="hljs-function"></span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"--------Information--------\n"</span>);
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Name:%s\n"</span>,student.name);
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Number:%d\n"</span>,student.num);
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Sex:%c\n"</span>,student.sex);
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Birthday:%d年%d月%d日\n"</span>,student.birthday.year,student.birthday.month,student.birthday.day);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h3 id="2联合联合类型的定义和访问"><span id="head16"> 2、联合：联合类型的定义和访问</span></h3>
+
+<p>联合(union)是一种特殊的数据类型，和结构体很像，结构体各成员变量有自己独立的存储位置，而联合的成员变量共享同一片存储区域，因此联合变量再一个时刻只能保存它的某一个成员的值。</p>
+
+<p><strong>联合的定义和初始化</strong></p>
+
+<p>联合的定义方式与结构体是一样的，只是把关键字 struct 改成 union：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">union</span> Data 
+</div><div class="hljs-line">{ 
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> i; 
+</div><div class="hljs-line">    <span class="hljs-keyword">double</span> x; 
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> str[<span class="hljs-number">16</span>]; 
+</div><div class="hljs-line">};
+</div></code></pre>
+
+<p><strong>联合成员值的获取和修改</strong></p>
+
+<p>获取联合成员值的方式和获取结构体成员的方式一样。但是与结构体不同的是，当改变一个联合成员的值时，实际上修改了该联合所有成员的值。</p>
+
+<p><strong>初始化</strong></p>
+
+<p>与结构一样，联合允许在初始化器中使用成员指示符来指示哪个成员被初始化。</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">union</span> Data var1 = { <span class="hljs-number">77</span> },
+</div><div class="hljs-line">           var2 = { .str = <span class="hljs-string">"Mary"</span> },
+</div><div class="hljs-line">           var3 = var1,
+</div><div class="hljs-line">           myData[<span class="hljs-number">100</span>] = { {.x= <span class="hljs-number">0.5</span>}, { <span class="hljs-number">1</span> }, var2 };
+</div></code></pre>
+
+<p>数组中myData中的元素如果没有指定初始化器，会被隐式的初始化为0值。</p>
+
+
+
+<h3 id="3类型定义语句typedef"><span id="head17"> 3、类型定义语句（typedef）</span></h3>
+
+<p>C语言中，除了可以直接使用C提供的标准类型名和程序编写者自己声明的结构体、共用体、枚举类型外，还可以用typedef指定新的类型名来代替已有的类型名。有下列两种情况：</p>
+
+<p><strong>1、简单地用一个新的类型名代替原有的类型名</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Integer;    <span class="hljs-comment">//指定用Integer为类型名，作用与int相同</span>
+</div><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">float</span> Real;     <span class="hljs-comment">//指定用Real为类型名，作用与float相同</span>
+</div></code></pre>
+
+<p><strong>2、命名一个简单的类型名代替复杂的类型表示方法</strong></p>
+
+<ul><li><p>命名一个新的类型名代表结构体类型</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> month;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> day;
+</div><div class="hljs-line">    <span class="hljs-keyword">int</span> year;
+</div><div class="hljs-line">}Date;
+</div><div class="hljs-line">以上声明了一个新类型名Date，代表上面的一个结构体类型。然后可以用新的类型名去Date定义变量，如：
+</div><div class="hljs-line">Date birthday;
+</div><div class="hljs-line">Date *p;
+</div></code></pre>
+
+<ul><li><p>命名一个新的类型名代表数组类型</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Num[<span class="hljs-number">100</span>];       <span class="hljs-comment">//声明Num为整体数组类型名</span>
+</div><div class="hljs-line">Num a;                      <span class="hljs-comment">//定义a为整体数组名，它有100个元素</span>
+</div></code></pre>
+
+<ul><li><p>命名一个新的类型名代表指针类型</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span>* String;       <span class="hljs-comment">//声明String为字符指针类型</span>
+</div><div class="hljs-line">String p,s[<span class="hljs-number">10</span>];             <span class="hljs-comment">//定义p为字符指针变量，s为字符指针数组</span>
+</div></code></pre>
+
+<ul><li><p>命名一个新的类型名代表指向函数的指针类型</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">int</span><span class="hljs-params">(* Pointer)</span><span class="hljs-params">()</span></span>;   <span class="hljs-comment">//声明Pointer为指向函数的指针类型，该函数返回整型值</span>
+</div><div class="hljs-line">Pointer p1,p2;              <span class="hljs-comment">//p1,p2为Pointer类型的指针变量</span>
+</div></code></pre>
+
+<p>归纳起来，声明一个新的类型名的方法是： <br>
+1、先按定义变量的方法写出定义体（如：int i）</p>
+
+<p>2、将变量名换成新类型名（例如：将i换成Count）</p>
+
+<p>3、在最前面加typedef（例如：typedef int Count）</p>
+
+<p>4、然后可以用新类型名去定义变量：Count i;</p>
+
+<hr>
+
+<ul><li><p>用struct只是对已经存在的类型指定一个新的类型名，而没有创造新的类型</p></li>
+<li><p>用struct声明数组类型、指针类型、结构体类型、共用体类型、枚举类型等，使得编程更加方便。例如：</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">int</span> a[<span class="hljs-number">10</span>],b[<span class="hljs-number">10</span>],c[<span class="hljs-number">10</span>],d[<span class="hljs-number">10</span>];
+</div><div class="hljs-line">可以用<span class="hljs-keyword">typedef</span>写：
+</div><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Arr[<span class="hljs-number">10</span>];
+</div><div class="hljs-line">Arr a,b,c,d;
+</div></code></pre>
+
+<ul><li><p>typedef与#define表面上有相似之处，例如：</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Count;
+</div><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> Count int;</span>
+</div></code></pre>
+
+<ul><li><p>当不同源文件中用到同一数据类型时，常用typedef声明一些数据类型。可以把所有的typedef名称声明单独放在一个头文件中，然后在需要用到他们的文件中用#include指令把他们包含到文件中。</p></li>
+<li><p>使用typedef名称有利于程序的通用和移植。</p></li>
+</ul>
+
+
+
+<h2 id="九输入输出和文件"><span id="head18"> 九、输入/输出和文件</span></h2>
+
+<p>文件有不同的类型，在程序设计中，主要用到两种文件：</p>
+
+<ul><li><p>程序文件</p></li>
+</ul>
+
+<blockquote>
+  <p>包括源程序文件（后缀为.c）,目标文件（后缀为.obj），可执行文件（后缀为.exe）。这种文件的内容是程序代码。</p>
+</blockquote>
+
+<ul><li><p>数据文件</p></li>
+</ul>
+
+<blockquote>
+  <p>文件的内容不是程序，而是供程序运行时读写的数据，如在程序运行过程中输入到磁盘（或其他外部设备）的数据，或在程序运行过程中供读入的数据。如一批学生的成绩数据、货物交易的数据等。</p>
+</blockquote>
+
+<p>为了简化用户对输入输出设备的操作，使用户不必去区分各种输入输出设备之间的区别，操作系统<strong>把各种设备都统一作为文件来处理。</strong></p>
+
+
+
+<h3 id="1输入输出的基本过程和文件类型"><span id="head19"> 1、输入/输出的基本过程和文件类型</span></h3>
+
+<p><strong>文件</strong>一般指存储在外部介质上数据的集合。</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs"><div class="hljs-line">一批数据是以文件的形式存放在外部介质（如磁盘）上的。操作系统是以文件为单位对数据进行管理的，也就是说，如果想找存放在外部介质上的数据，必须按文件名找到所指定的文件，然后再从该文件中读取数据。要向外部介质上存放数据也必须先建立一个文件（以文件名作为标志），才能向它输入数据。
+</div></code></pre>
+
+<p>文件标识分为三部分：</p>
+
+<ul><li><p>文件路径</p></li>
+<li><p>文件名主干</p></li>
+<li><p>文件后缀</p></li>
+</ul>
+
+<p>doc（Word生成的文件），txt（文本文件），dat（数据文件），c（C语言源程序文件），cpp（C++源程序文件），for（FORTRAN语言源程序文件），pas（Pascal语言源程序文件），obj（目标文件），exe（可执行文件），ppt（电子幻灯文件），bmp（图形文件）</p>
+
+
+
+<h4 id="文件的分类"><span id="head20"> 文件的分类</span></h4>
+
+<pre class="prettyprint hljs-dark"><code class="hljs asciidoc"><div class="hljs-line">根据数据的组织形式，数据文件可分为*<span class="hljs-strong">*ASCII文件*</span><span class="hljs-strong">*和*</span><span class="hljs-strong">*二进制文件*</span><span class="hljs-strong">*。数据在内存中是以二进制形式存储的，如果不加转换地输出到外存，就是二进制文件，可以认为它是存储在内存的数据的映像，所以称之为*</span><span class="hljs-strong">*映像文件*</span><span class="hljs-strong">*。如果要求在外存上以ASCII代码形式存储，则需要在存储前进行转换。ASCII文件又称为*</span><span class="hljs-strong">*文本文件*</span><span class="hljs-strong">*，每一个字节存放一个字符的ASCII代码。</span>
+</div><div class="hljs-line"><span class="hljs-strong"></span>
+</div><div class="hljs-line"><span class="hljs-strong"></span>字符一律以ASCII形式存储，数值型数据既可以用ASCII形式存储，也可以用二进制形式存储。如有整数10000，如果用ASCII码形式输出到磁盘，则在磁盘中占5个字节（每个字符占一个字节），而用二进制形式存储，则在磁盘上只占4个字节。
+</div></code></pre>
+
+<ul><li><p>如果在程序运行过程中有的中间数据需要保存在外部介质上，以便在需要时再输入到内存，一般用二进制文件比较方便。在事务处理中，常有大批数据存放在磁盘上，随时调入计算机进行查询和处理，然后又把修改过的信息再存回磁盘，这时也常用二进制文件。</p></li>
+</ul>
+
+
+
+<h4 id="文件缓冲区"><span id="head21"> 文件缓冲区</span></h4>
+
+<pre class="prettyprint hljs-dark"><code class="hljs asciidoc"><div class="hljs-line">ANSI C标准采用*<span class="hljs-strong">*缓冲文件系统*</span><span class="hljs-strong">*处理数据文件，所谓缓冲文件系统就是系统自动的在内存区为程序中每一个正在使用的文件开辟一个*</span><span class="hljs-strong">*文件缓冲区*</span><span class="hljs-strong">*。从内存向磁盘输出数据必须先送到内存中的缓冲区，装满缓冲区之后才能一起送到磁盘去。如果从磁盘向计算机读入数据，则一次从磁盘文件将一批数据输入到内存缓冲区（充满缓冲区），然后再从缓冲区逐个地将数据送到程序数据区（给程序变量）。这样做是为了节省存取时间，提高效率，缓冲区的大小由各个具体的C编译系统确定。</span>
+</div></code></pre>
+
+<blockquote>
+  <p>每一个文件在内存中只有一个缓冲区，在向文件输出数据时，他就作为输出缓冲区，在向文件输入数据时，他就作为输入缓冲区。</p>
+</blockquote>
+
+
+
+<h4 id="文件类型指针"><span id="head22"> 文件类型指针</span></h4>
+
+<pre class="prettyprint hljs-dark"><code class="hljs asciidoc"><div class="hljs-line">缓冲文件系统中，关键的概念是*<span class="hljs-strong">*文件类型指针*</span><span class="hljs-strong">*，简称*</span><span class="hljs-strong">*文件指针*</span><span class="hljs-strong">*。每个被使用的文件都在内存中开辟一个相应的文件信息区，用来存放文件的有关信息（如文件的名字、文件状态及文件当前位置等）。这些信息是保存在一个结构体变量中的。该结构体类型是由系统声明的，取名为FILE。</span>
+</div></code></pre>
+
+<p>如：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">short</span> level;            <span class="hljs-comment">//缓冲区满或空的程度</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">unsigned</span> flags;         <span class="hljs-comment">//文件状态标志</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> fd;                <span class="hljs-comment">//文件描述符</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> hold;     <span class="hljs-comment">//如缓冲区无内容不读取字符</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">short</span> bsize;            <span class="hljs-comment">//缓冲区的大小</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>* buffer;  <span class="hljs-comment">//数据缓冲区的位置</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>* surp;    <span class="hljs-comment">//文件位置标记指针当前的指向</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">unsigned</span> istemp;        <span class="hljs-comment">//临时文件指示器</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">short</span> token;            <span class="hljs-comment">//用于有效性的检查</span>
+</div><div class="hljs-line">}FILE;
+</div></code></pre>
+
+<p>下面定义一个指向文件型数据的指针变量：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line">FILE *fp;
+</div></code></pre>
+
+<p>定义fp是一个指向FILE类型数据的指针变量。可以使fp指向某一个文件的文件信息区（是一个结构体变量），通过该文件信息区中的信息就能够访问该文件。也就是说，<strong>通过文件指针变量能够找到与它关联的文件</strong>。通常将这种指向文件信息区的指针变量简称为<strong>指向文件的指针变量。</strong></p>
+
+
+
+<h3 id="2文件的打开创建和关闭"><span id="head23"> 2、文件的打开、创建和关闭</span></h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line">FILE *fp;               <span class="hljs-comment">//定义一个指向文件的指针变量fp</span>
+</div><div class="hljs-line">fp=fopen(<span class="hljs-string">"al"</span>,<span class="hljs-string">"r"</span>);     <span class="hljs-comment">//将fopen函数的返回值赋给指针变量fp</span>
+</div></code></pre>
+
+<p>在打开一个文件时，通知编译系统以下三个信息：</p>
+
+<ul><li><p>需要打开文件的名字，也就是准备访问的文件的名字</p></li>
+<li><p>使用文件的方式（”读“或”写“等）</p></li>
+<li><p>让哪一个文件变量指向被打开的文件</p></li>
+</ul>
+
+<p>文件使用方式：</p>
+
+<table><tbody><tr style="font-weight:bold">  <td align="center">文件使用方式</td>  <td align="center">含义</td>  <td align="center">如果指定的文件不存在</td></tr><tr>  <td align="center">r（只读）</td>  <td align="center">为了输入数据，打开一个已存在的文本文件</td>  <td align="center">出错</td></tr><tr>  <td align="center">w（只写）</td>  <td align="center">为了输出数据，打开一个文本文件</td>  <td align="center">建立新文件</td></tr><tr>  <td align="center">a（追加）</td>  <td align="center">向文本文件尾添加数据</td>  <td align="center">出错</td></tr><tr>  <td align="center">rb（只读）</td>  <td align="center">为了输入数据，打开一个二进制文件</td>  <td align="center">出错</td></tr><tr>  <td align="center">wb（只写）</td>  <td align="center">为了输出数据，打开一个二进制文件</td>  <td align="center">建立新文件</td></tr><tr>  <td align="center">ab（追加）</td>  <td align="center">向二进制文件尾添加数据</td>  <td align="center">出错</td></tr><tr>  <td align="center">”r+“（读写）</td>  <td align="center">为了读和写，打开一个文本文件</td>  <td align="center">出错</td></tr><tr>  <td align="center">”w+“（读写）</td>  <td align="center">为了读和写，建立一个新的文本文件</td>  <td align="center">建立新文件</td></tr><tr>  <td align="center">”a+“（读写）</td>  <td align="center">为了读和写，打开一个文本文件</td>  <td align="center">出错</td></tr><tr>  <td align="center">“rb+”（读写）</td>  <td align="center">为了读和写，打开一个二进制文件</td>  <td align="center">出错</td></tr><tr>  <td align="center">“wb+”（读写）</td>  <td align="center">为了读和写，建立一个新的二进制文件</td>  <td align="center">建立新文件</td></tr><tr>  <td align="center">“ab+”（读写）</td>  <td align="center">为读写打开一个二进制文件</td>  <td align="center">出错</td></tr></tbody></table>
+
+<p>关闭文件用fclose函数。fclose函数的一般形式为：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line">fclose(fp);
+</div></code></pre>
+
+<p>前面曾把打开文件时函数返回的指针赋给了fp，现在把fp指向的文件关闭，此后fp不再指向该文件。</p>
+
+<blockquote>
+  <p>如果不关闭文件就结束程序运行将会丢失数据。因为，在向文件写数据时，是先将数据输出到缓冲区，待缓冲区充满后才正式输出给文件。如果当数据未充满缓冲区时程序结束运行，就有可能使缓冲区中的数据丢失。用fclose函数关闭文件时，先把缓冲区中的数据输出到磁盘文件，然后才撤销文件信息区。有的编译系统在程序结束前会自动先将缓冲区中的数据写到文件，从而避免了这个问题，但还是应当养成在程序终止之前关闭所有文件的习惯。</p>
+</blockquote>
+
+<p>fclose函数也带回一个值，当成功地执行了关闭操作，则返回值为0；否则返回EOF（-1）。</p>
+
+
+
+<h3 id="3文件数据的正文文本格式读写"><span id="head24"> 3、文件数据的正文（文本）格式读写</span></h3>
+
+
+
+<h4 id="1读写一个字符的函数"><span id="head25"> 1、读写一个字符的函数</span></h4>
+
+<table><tbody><tr style="font-weight:bold">  <td align="center">函数名</td>  <td align="center">调用形式</td>  <td align="center">功能</td>  <td align="center">返回值</td></tr><tr>  <td align="center">fgetc</td>  <td align="center">fgetc(fp)</td>  <td align="center">从fp指向地文件读入一个字符</td>  <td align="center">读成功，带回所读的字符，失败则返回文件结束标志EOF(即-1)</td></tr><tr>  <td align="center">fputc</td>  <td align="center">fputc(ch,fp)</td>  <td align="center">把字符ch写到文件指示变量fp所指向的文件中</td>  <td align="center">输出成功，返回值就是输出的字符；输出失败，则返回EOF(即-1)</td></tr></tbody></table>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+</div><div class="hljs-line">    FILE * fp;
+</div><div class="hljs-line">    <span class="hljs-keyword">char</span> ch,filename[<span class="hljs-number">10</span>];
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"请输入所用的文件名"</span>);
+</div><div class="hljs-line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>,filename);
+</div><div class="hljs-line">    getchar();              <span class="hljs-comment">//用来消化最后输入的回车符</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span>((fp=fopen(filename,<span class="hljs-string">"w"</span>))==<span class="hljs-literal">NULL</span>)
+</div><div class="hljs-line">    {
+</div><div class="hljs-line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"cannot open file\n"</span>);
+</div><div class="hljs-line">        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);            <span class="hljs-comment">//终止程序</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"请输入一个准备存储到磁盘的字符串（以#结束）："</span>);
+</div><div class="hljs-line">    ch=getchar();           <span class="hljs-comment">//接受从键盘输入的第一个字符串</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">while</span>(ch!=<span class="hljs-string">'#'</span>){
+</div><div class="hljs-line">        fputc(ch,fp);       <span class="hljs-comment">//像磁盘文件输出一个字符</span>
+</div><div class="hljs-line">        <span class="hljs-built_in">putchar</span>(ch);        <span class="hljs-comment">//将输出的字符显示在屏幕上</span>
+</div><div class="hljs-line">        ch=getchar();       <span class="hljs-comment">//再接收从键盘输入的一个字符</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    fclose(fp);
+</div><div class="hljs-line">    <span class="hljs-built_in">putchar</span>(<span class="hljs-number">10</span>);            <span class="hljs-comment">//向屏幕输出一个换行符</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<p>运行结果：</p>
+
+<p><code>请输入所用的文件名：file1.dat</code></p>
+
+<p><code>请输入一个准备存储到磁盘的字符串（以#结束）：computer and c#</code></p>
+
+<p><code>copmuter and c</code></p>
+
+<hr>
+
+
+
+<h4 id="2读写一个字符串的函数"><span id="head26"> 2、读写一个字符串的函数</span></h4>
+
+<table><tbody><tr style="font-weight:bold">  <td align="center">函数名</td>  <td align="center">调用形式</td>  <td align="center">功能</td>  <td align="center">返回值</td></tr><tr>  <td align="center">fgets</td>  <td align="center">fgets(str,n,fp)</td>  <td align="center">从fp指向的文件读入一个长度为(n-1)的字符串，存放到字符数组str中</td>  <td align="center">读成功，返回地址str；失败则返回NULL</td></tr><tr>  <td align="center">fputs</td>  <td align="center">fputs(str,fp)</td>  <td align="center">把str所指向的字符串写到文件指针变量fp所指向的文件中</td>  <td align="center">输出成功，返回0；否则返回非0值</td></tr></tbody></table>
+
+
+
+<h4 id="3用格式化的方式读取文本文件"><span id="head27"> 3、用格式化的方式读取文本文件</span></h4>
+
+<p>一般调用方式为：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-built_in">fprintf</span>(文件指针，格式化字符串，输出表列);
+</div><div class="hljs-line"><span class="hljs-built_in">fscanf</span>(文件指针，格式化字符串，输入表列);
+</div></code></pre>
+
+<p>例如：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-built_in">fprintf</span>(fp,<span class="hljs-string">"%d,%6.2f"</span>,i,f);
+</div><div class="hljs-line"><span class="hljs-comment">/*它的作用是将int型变量i和float型变量f按%d和%6.2f的格式输出到fp指向的文件中。</span>
+</div><div class="hljs-line"><span class="hljs-comment">若i=3,f=4.5,则输出到磁盘文件上的是以下字符：</span>
+</div><div class="hljs-line"><span class="hljs-comment">3，4.50                              */</span>
+</div></code></pre>
+
+<p>同样的，用以下fscanf函数可以从磁盘文件上读入ASCII字符：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"><span class="hljs-built_in">fscanf</span>(fp,<span class="hljs-string">"%d,%f"</span>,&amp;i,&amp;f);
+</div></code></pre>
+
+<p>用fprintf和fscanf函数对磁盘文件读写，使用方便，容易理解，但由于在输入时要将文件中的ASCII码转换成二进制形式再保存到内存变量中，在输出时又要将内存中的二进制形式转换成字符，要花费较多时间，因此，在内存和磁盘频繁交换数据的情况下，最好不用fprintf和pscanf函数。</p>
+
+
+
+<h4 id="4用二进制方式向文件读写一组数据"><span id="head28"> 4、用二进制方式向文件读写一组数据</span></h4>
+
+<p>它们的一般调用形式为：</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line">fread(buffer,size,count,fp);
+</div><div class="hljs-line">fwrite(buffer,size,count,fp);
+</div><div class="hljs-line"><span class="hljs-comment">//buffer:是一个地址，对fread来说，它是用来存放从文件读入的数据的存储区的地址。对fwrite来说，是要把此地址开始的存储区中的数据向文件输出</span>
+</div><div class="hljs-line"><span class="hljs-comment">//size：要读写的字节数</span>
+</div><div class="hljs-line"><span class="hljs-comment">//count：要读写多少个数据项（每个数据项长度为size）</span>
+</div><div class="hljs-line"><span class="hljs-comment">//fp：FILE类型指针</span>
+</div><div class="hljs-line">如：
+</div><div class="hljs-line">fread(f,<span class="hljs-number">4</span>,<span class="hljs-number">10</span>,fp);   <span class="hljs-comment">//其中，f是一个float型数组名（代表数组首元素地址）。这个函数从fp所指向的文件读入10个4个字节的数据，存放在数组f中</span>
+</div></code></pre>
+
+
+
+<h3 id="4读写操作中的定位"><span id="head29"> 4、读写操作中的定位</span></h3>
+
+<p>在读写文件的过程中，如果想知道当前的位置，可以使用tell()来获取</p>
+
+<p>如果在读写文件的过程中，需要从另外一个位置进行操作的话，则用seek() <br>
+seek(offset, from)有<em>2</em>个参数</p>
+
+<ul><li><p>offset:偏移量</p></li>
+<li><p>from:方向</p></li>
+<li><p>0：表示文件开头</p></li>
+<li><p>1：表示当前位置</p></li>
+<li><p>2：表示文件末尾</p></li>
+</ul>
+
+<p>demo：把位置设置为：从文件开头，偏移5个字节</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line">#打开一个已存在的文件
+</div><div class="hljs-line">f = open(<span class="hljs-string">'./test.txt'</span>, <span class="hljs-string">'r'</span>)
+</div><div class="hljs-line">str = f.read(<span class="hljs-number">30</span>)
+</div><div class="hljs-line">print(<span class="hljs-string">'读取的数据是：'</span>, str)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">#查找当前位置
+</div><div class="hljs-line">position = f.tell()
+</div><div class="hljs-line">print(<span class="hljs-string">"当前文件位置：',  position)</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>
+</div><div class="hljs-line"><span class="hljs-string">#重新设置位置</span>
+</div><div class="hljs-line"><span class="hljs-string">f.seek(5,0)</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>
+</div><div class="hljs-line"><span class="hljs-string">#查找当前位置</span>
+</div><div class="hljs-line"><span class="hljs-string">position = f.tell()</span>
+</div><div class="hljs-line"><span class="hljs-string">print("</span>当前文件位置：<span class="hljs-string">',  position)</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>
+</div><div class="hljs-line"><span class="hljs-string">f.close()</span>
+</div></code></pre>
+
+<p>demo:把位置设置为：离文件末尾，3字节处</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line">#打开一个已存在的文件
+</div><div class="hljs-line">f = open(<span class="hljs-string">'./test.txt'</span>, <span class="hljs-string">'r'</span>)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">#查找当前位置
+</div><div class="hljs-line">position = f.tell()
+</div><div class="hljs-line">print(<span class="hljs-string">'当前位置：'</span>, position)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">#重新设置位置
+</div><div class="hljs-line">f.seek(<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">#读取到的数据为：文件最后<span class="hljs-number">3</span>个字节数据
+</div><div class="hljs-line">str = f.read()
+</div><div class="hljs-line">print(<span class="hljs-string">'读取的数据是：'</span>, str)
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">f.close()
+</div></code></pre>
+
+
+
+<h3 id="5文件数据的二进制格式读写"><span id="head30"> 5、文件数据的二进制格式读写</span></h3>
+
+
+
+<h4 id="1二进制文件操作"><span id="head31"> 1、二进制文件操作</span></h4>
+
+<p>rb   -  读的时候获取到的是二进制数据(bytes) <br>
+wb   -  写的时候写入的内容要求类型是二进制文件</p>
+
+<p>普通的文本文件可以通过二进制的形式去打开，影响只是获取到的内容，和写进去的内容的数据类型； <br>
+二进制文件只能以二进制的形式打开 （例如: 图片、视频、音频等）</p>
+
+
+
+<h4 id="2二进制数据"><span id="head32"> 2、二进制数据</span></h4>
+
+<p>一般二进制数据都是通过网络请求获取到，或者通过读取本地的二进制文件来取到</p>
+
+<p>1）将字符串转换二进制 <br>
+bytes(字符串, 编码方式) <br>
+字符串.encode(编码方式)</p>
+
+<p>2）将二进制转换成字符串 <br>
+str(二进制数据, 编码方式) <br>
+二进制数据.decode(编码方式)</p>
+
+
+
+<h4 id="3文件上下文"><span id="head33"> 3、文件上下文</span></h4>
+
+<p>with open(文件路径,打开方式,编码方式) as 文件对象: <br>
+操作文件</p>
+
+<p>文件操作完成后，会自动关闭</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-c hljs cpp"><div class="hljs-line"># <span class="hljs-number">1.</span> 普通文本文件以二进制的形式打开
+</div><div class="hljs-line">f = open(<span class="hljs-string">'./files/test.txt'</span>, <span class="hljs-string">'rb'</span>)
+</div><div class="hljs-line">reslut = f.read()
+</div><div class="hljs-line">print(reslut, <span class="hljs-string">'====='</span>,type(reslut))
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">f = open(<span class="hljs-string">'./files/test.txt'</span>, <span class="hljs-string">'wb'</span>)
+</div><div class="hljs-line">f.write(bytes(<span class="hljs-string">'bbb'</span>, encoding=<span class="hljs-string">'utf-8'</span>))
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-number">2.</span> 二进制文件
+</div><div class="hljs-line">f1 = open(<span class="hljs-string">'./files/luffy4.jpg'</span>, <span class="hljs-string">'rb'</span>)
+</div><div class="hljs-line">reslut = f1.read()
+</div><div class="hljs-line">print(reslut, type(reslut))
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">f2 = open(<span class="hljs-string">'./files/aaa.jpg'</span>, <span class="hljs-string">'wb'</span>)
+</div><div class="hljs-line">f2.write(reslut)
+</div></code></pre></div></body></html>
